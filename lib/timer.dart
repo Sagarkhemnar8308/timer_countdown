@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Duration duration = const Duration(seconds: 10);
+  Duration duration = const Duration(seconds: 2);
   Timer? timer;
 
   @override
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
           'Payment Successfully!',
           style: TextStyle(color: Colors.white),
         ),
-        duration: Duration(seconds: 3),
+        duration: Duration(seconds: 5),
       ),
     );
   }
@@ -54,31 +54,45 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularCountDownTimer(
-          duration: duration.inSeconds,
-          initialDuration: 0,
-          controller: CountDownController(),
-          width: MediaQuery.of(context).size.width / 2,
-          height: MediaQuery.of(context).size.height / 2,
-          ringColor: Colors.grey[300]!,
-          ringGradient: null,
-          fillColor: Colors.green,
-          fillGradient: null,
-          backgroundColor: Colors.white,
-          backgroundGradient: null,
-          strokeWidth: 20.0,
-          strokeCap: StrokeCap.round,
-          textStyle: const TextStyle(
-            fontSize: 33.0,
-            color: Color.fromARGB(255, 0, 0, 0),
-            fontWeight: FontWeight.bold,
-          ),
-          textFormat: CountdownTextFormat.MM_SS,
-          isReverse: true,
-          isReverseAnimation: false,
-          isTimerTextShown: true,
-          autoStart: true,
-        ),
+        child: duration.inSeconds > 0
+            ? CircularCountDownTimer(
+                duration: duration.inSeconds,
+                initialDuration: 0,
+                controller: CountDownController(),
+                width: MediaQuery.of(context).size.width / 2,
+                height: MediaQuery.of(context).size.height / 2,
+                ringColor: Colors.grey[300]!,
+                fillColor: Colors.green,
+                backgroundColor: Colors.white,
+                strokeWidth: 20.0,
+                strokeCap: StrokeCap.round,
+                textStyle: const TextStyle(
+                  fontSize: 33.0,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.bold,
+                ),
+                textFormat: CountdownTextFormat.MM_SS,
+                isReverse: true,
+                isReverseAnimation: false,
+                isTimerTextShown: true,
+                autoStart: true,
+              )
+            : Container(
+                height: 200,
+                width: 200,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                      color: Colors.green, style: BorderStyle.solid, width: 19),
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: const Icon(
+                  Icons.check,
+                  color: Colors.green,
+                  size: 150.0,
+                  weight: 60,
+                  textDirection: TextDirection.ltr,
+                ),
+              ),
       ),
     );
   }
